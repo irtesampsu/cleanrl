@@ -201,7 +201,7 @@ if __name__ == "__main__":
         mean = 0.0
         stddev = 0.2
         noise = torch.rand(prob.shape)*mean + stddev
-        prob = prob + noise
+        prob = prob + noise.to(device)
         prob = prob / torch.sum(prob)
         actions = prob.multinomial(num_samples=1, replacement=True).cpu().numpy()
 
