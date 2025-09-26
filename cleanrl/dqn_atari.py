@@ -199,7 +199,7 @@ if __name__ == "__main__":
         prob = F.softmax(q_values, dim=0)
         # print(f"prob.shape: {prob.shape}")
         mean = 0.0
-        stddev = 0.2
+        stddev = 0.1
         noise = torch.rand(prob.shape)*mean + stddev
         prob = prob + noise.to(device)
         prob = prob / torch.sum(prob)
