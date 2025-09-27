@@ -204,8 +204,11 @@ if __name__ == "__main__":
         prob = prob + noise.to(device)
         prob = prob / torch.sum(prob)
         # actions = prob.multinomial(num_samples=1, replacement=True).cpu().numpy()
-        actions = torch.argmax(prob, dim=1).cpu().numpy()
-        actions = actions.flatten()
+        if random.random() < epsilon: 
+            actions = np.array([envs.single_action_space.sample() for _ in range(envs.num_envs)]) # choose a random action
+        else:    
+            actions = torch.argmax(prob, dim=1).cpu().numpy()
+            actions = actions.flatten()
         # print(actions)
 
 
